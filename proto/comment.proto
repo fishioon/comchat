@@ -1,0 +1,57 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/fishioon/comchat/proto";
+
+service Chat {
+  rpc Conn(ConnReq) returns (stream ConnRsp);
+  rpc PubMsg(PubMsgReq) returns (PubMsgRsp);
+}
+
+message ConnReq {
+  repeated Group groups = 1;
+}
+
+message ConnRsp {
+  repeated Msg msgs = 1;
+}
+
+message PubMsgReq {
+  Msg msg = 1;
+}
+
+message PubMsgRsp {}
+
+enum MsgKind {
+  // user comment
+  OK = 0;
+  HeartBeat = 1;
+}
+
+message Msg {
+  string id = 1;
+  string gid = 2;
+  // reply msg id
+  string pid = 3;
+  MsgKind kind = 4; // heartbeat
+  string content = 5;
+  int64 timestamp = 6;
+  string seq = 7;
+}
+
+message Group {
+  // group id
+  string id = 1;
+  // already received message seq
+  string seq = 2;
+}
+
+message GroupDetail {
+  string id = 1;
+  string url = 2;
+  int64 msgs_count = 3;
+  // online users count
+  int64 online_users_count = 4;
+  // online users
+  // repeated int64 users = 5;
+}
