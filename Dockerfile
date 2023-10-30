@@ -22,8 +22,8 @@ WORKDIR /app
 
 COPY --from=build-stage /app/bin/ccsrv ./ccsrv
 
-EXPOSE 8080
+EXPOSE 9981
 
 USER nonroot:nonroot
 
-ENTRYPOINT ["/ccsrv"]
+ENTRYPOINT ["./ccsrv"]

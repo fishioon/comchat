@@ -1,0 +1,23 @@
+.danmu-container {
+    position: relative;
+}
+
+.danmu {
+    position: absolute;
+    top: 20%;
+    white-space: nowrap;
+    color: black;
+    font-weight: bold;
+    font-size: 24px;
+    animation: roll 20s linear; /* 5秒内从右向左滚动，无限循环 */
+    z-index: 999;
+}
+
+@keyframes roll {
+    0% {
+        left: 100%; /* 初始位置，从右侧开始 */
+    }
+    100% {
+        left: -100%; /* 最终位置，移到左侧之外 */
+    }
+}
